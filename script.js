@@ -24,10 +24,11 @@ let generatePassword = [];
 let generatedPassword = [];
 
 passQual = {
-  passLength: 19,
+  passLength: 8,
   lowCase: true,
   upCase: true,
-  spChar: true
+  spChar: true,
+  numCh: true
 }
 
 function makeArray() {
@@ -40,6 +41,9 @@ function makeArray() {
   if (passQual.spChar) {
     generatePassword = generatePassword.concat(specChar);
   }
+  if (passQual.numCh) {
+    generatePassword = generatePassword.concat(numChar);
+  }
 }
 
 function makePass(){
@@ -47,7 +51,20 @@ function makePass(){
   for (i = 0; i < passQual.passLength; i++){
     generatedPassword.push(generatePassword[Math.floor(Math.random() * generatePassword.length)])
   }
-    console.log(generatedPassword);
+
+  let password = generatedPassword.join("");
+
+  let upChk = generatePassword.some(r=> upChar.includes(r))
+  console.log(upChk)
+  let lowChk = generatePassword.some(r=> lowChar.includes(r))
+  console.log(lowChk);
+  let spcChk = generatePassword.some(r=> specChar.includes(r))
+  console.log(spcChk);
+  let numChk = generatePassword.some(r=> numChar.includes(r))
+  console.log(numChk);
+
+  console.log(password);
+  
 }
 
 makePass();
