@@ -15,12 +15,11 @@ When the red "Generate Password" button is pressed user is given a series of pro
     -How long should the password be? (8-128 characters accepted)
     -Three sets of symbols that can be used in any combination as long as at least one set is selected
     -Password is shown in box in middle of page that previously read "Your Secure Password"
-
-    ```
+    :
     ![Basic Page](./screenshots/screenshot1.png)
-    ```
+    :
     ![First Prompt](./screenshots/screenshot2.png)
-    ```
+    :
     ![Generated Password](./screenshots/screenshot3.png)
 
 ## Credits
