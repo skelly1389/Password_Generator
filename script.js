@@ -29,18 +29,20 @@ function makeArray() {
     charsetArray = charsetArray.concat(numCharArray);
   }
 }
+function userPrompts(){
+    // sets the values of passQual with user inputs
+    passQual = {
+      passLength: prompt("Choose a password length between 8 and 128 characters!", "8" ),
+      lowCase: confirm("Press okay to include lowercase characters"),
+      upCase: confirm("Press okay to include uppercase characters"), 
+      numCh: confirm("Press okay to include numbers"),
+      spChar: confirm("Press okay to include special characters")
+    }
+}
 // the function that takes the character set array and uses it to create a password
 function makePass(){
   // clears stored password in case function is reset due to not meeting parameters
   newPassArray = [];
-  // sets the values of passQual with user inputs
-  passQual = {
-    passLength: prompt("Choose a password length between 8 and 128 characters!", "8" ),
-    lowCase: confirm("Press okay to include lowercase characters"),
-    upCase: confirm("Press okay to include uppercase characters"), 
-    numCh: confirm("Press okay to include numbers"),
-    spChar: confirm("Press okay to include special characters")
-  }
   // makes sure the password is between 8 and 128 characters in length
   while (passQual.passLength < 8 || passQual.passLength > 128) {
     alert("Password length must be between 8 and 128 characters and contain at least one set of characters!");
@@ -66,8 +68,7 @@ function makePass(){
     || (passQual.upCase == true && newPassArray.some(item => upCharArray.includes(item)) == false)
     || (passQual.spChar == true && newPassArray.some(item => specCharArray.includes(item)) == false)
     || (passQual.numCh == true && newPassArray.some(item => numCharArray.includes(item)) == false)){
-      //if the password is missing a character the function is rerun from scratch
-      alert("Re-enter parameters");
+      //if the password is missing a character the function is rerun after point where user inputs are chosen
       makePass();
       return;
     // if the password includes at least one character from selected parameters password is displayed
@@ -78,5 +79,10 @@ function makePass(){
         passwordText.value = password;
       }
   }
+  // separates my original function in two so that making sure password meets parameters doesn't re-prompt user
+  function almostThere(){
+    userPrompts();
+    makePass();
+  }
 // runs function makePass when button on page is clicked
-generateBtn.addEventListener("click", makePass);
+generateBtn.addEventListener("click", almostThere);
