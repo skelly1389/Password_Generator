@@ -29,18 +29,18 @@ function makeArray() {
     charsetArray = charsetArray.concat(numCharArray);
   }
 }
-function userPrompts(){
-    // sets the values of passQual with user inputs
-    passQual = {
-      passLength: prompt("Choose a password length between 8 and 128 characters!", "8" ),
-      lowCase: confirm("Press okay to include lowercase characters"),
-      upCase: confirm("Press okay to include uppercase characters"), 
-      numCh: confirm("Press okay to include numbers"),
-      spChar: confirm("Press okay to include special characters")
-    }
+function userPrompts() {
+  // sets the values of passQual with user inputs
+  passQual = {
+    passLength: prompt("Choose a password length between 8 and 128 characters!", "8"),
+    lowCase: confirm("Press okay to include lowercase characters"),
+    upCase: confirm("Press okay to include uppercase characters"),
+    numCh: confirm("Press okay to include numbers"),
+    spChar: confirm("Press okay to include special characters")
+  }
 }
 // the function that takes the character set array and uses it to create a password
-function makePass(){
+function makePass() {
   // clears stored password in case function is reset due to not meeting parameters
   newPassArray = [];
   // makes sure the password is between 8 and 128 characters in length
@@ -52,37 +52,37 @@ function makePass(){
   while (!passQual.lowCase && !passQual.upCase && !passQual.numCh && !passQual.spChar) {
     alert("Must select at least one set of characters!");
     passQual.lowCase = confirm("Press okay to include lowercase characters");
-    passQual.upCase = confirm("Press okay to include uppercase characters"); 
+    passQual.upCase = confirm("Press okay to include uppercase characters");
     passQual.numCh = confirm("Press okay to include numbers");
     passQual.spChar = confirm("Press okay to include special characters");
   }
   makeArray();
   // makes sure password length is equal to user parameter
-  for (i = 0; i < passQual.passLength; i++){
+  for (i = 0; i < passQual.passLength; i++) {
     newPassArray.push(charsetArray[Math.floor(Math.random() * charsetArray.length)])
   }
   // turns the generated password array into a string without commas
   let password = newPassArray.join("");
   // checks that, if a parameter is set to true, the password must contain a character from that set
-  if((passQual.lowCase == true && newPassArray.some(item => lowCharArray.includes(item)) == false) 
+  if ((passQual.lowCase == true && newPassArray.some(item => lowCharArray.includes(item)) == false)
     || (passQual.upCase == true && newPassArray.some(item => upCharArray.includes(item)) == false)
     || (passQual.spChar == true && newPassArray.some(item => specCharArray.includes(item)) == false)
-    || (passQual.numCh == true && newPassArray.some(item => numCharArray.includes(item)) == false)){
-      //if the password is missing a character the function is rerun after point where user inputs are chosen
-      makePass();
-      return;
-    // if the password includes at least one character from selected parameters password is displayed
-    } else {  
-        // replaces html text at id password with new variable
-        let passwordText = document.querySelector("#password");
-        // sets string to generated password
-        passwordText.value = password;
-      }
-  }
-  // separates my original function in two so that making sure password meets parameters doesn't re-prompt user
-  function almostThere(){
-    userPrompts();
+    || (passQual.numCh == true && newPassArray.some(item => numCharArray.includes(item)) == false)) {
+    //if the password is missing a character the function is rerun after point where user inputs are chosen
     makePass();
+    return;
+    // if the password includes at least one character from selected parameters password is displayed
+  } else {
+    // replaces html text at id password with new variable
+    let passwordText = document.querySelector("#password");
+    // sets string to generated password
+    passwordText.value = password;
   }
+}
+// separates my original function in two so that making sure password meets parameters doesn't re-prompt user
+function almostThere() {
+  userPrompts();
+  makePass();
+}
 // runs function makePass when button on page is clicked
 generateBtn.addEventListener("click", almostThere);
