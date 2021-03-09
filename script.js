@@ -60,7 +60,6 @@ function makePass(){
     || (passQual.upCase == true && generatedPassword.some(item => upChar.includes(item)) == false)
     || (passQual.spChar == true && generatedPassword.some(item => specChar.includes(item)) == false)
     || (passQual.numCh == true && generatedPassword.some(item => numChar.includes(item)) == false)){
-      console.log("invalid");
       makePass();
       return;
     } else {  
