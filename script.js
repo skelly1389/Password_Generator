@@ -10,7 +10,7 @@ function writePassword() {
 }
 
 // Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+// generateBtn.addEventListener("click", makePass());
 
 const lowerChar = "abcdefghijklmnopqrstuvwxyz";
 const upperChar = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -20,7 +20,7 @@ let lowChar = lowerChar.split('');
 let upChar = upperChar.split('');
 let numChar = numberChar.split('');
 let specChar = specialChar.split('');
-generatePassword = [];
+let generatePassword = [];
 let generatedPassword = [];
 
 passQual = {
@@ -67,8 +67,4 @@ function makePass(){
       }
 }
 
-makePass();
-
-function checkChars(arr1, arr2) { 
-  arr1.some(item => arr2.includes(item));
-}
+generateBtn.addEventListener("click", makePass);
