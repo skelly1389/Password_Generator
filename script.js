@@ -5,34 +5,34 @@ const lowerChar = "abcdefghijklmnopqrstuvwxyz";
 const upperChar = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const numberChar = "1234567890";
 const specialChar = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
-// turns character sets into arrays
-let lowChar = lowerChar.split('');
-let upChar = upperChar.split('');
-let numChar = numberChar.split('');
-let specChar = specialChar.split('');
+// turns character set strings into arrays
+let lowCharArray = lowerChar.split('');
+let upCharArray = upperChar.split('');
+let numCharArray = numberChar.split('');
+let specCharArray = specialChar.split('');
 // makes sure the arrays to be generated are empty, might be redundant 
-let generatePassword = [];
-let generatedPassword = [];
+let charsetArray = [];
+let newPassArray = [];
 // a function that creates an array based on which character sets the user selects
 function makeArray() {
-  generatePassword = [];
+  charsetArray = [];
   if (passQual.lowCase) {
-    generatePassword = generatePassword.concat(lowChar);
+    charsetArray = charsetArray.concat(lowCharArray);
   }
   if (passQual.upCase) {
-    generatePassword = generatePassword.concat(upChar);
+    charsetArray = charsetArray.concat(upCharArray);
   }
   if (passQual.spChar) {
-    generatePassword = generatePassword.concat(specChar);
+    charsetArray = charsetArray.concat(specCharArray);
   }
   if (passQual.numCh) {
-    generatePassword = generatePassword.concat(numChar);
+    charsetArray = charsetArray.concat(numCharArray);
   }
 }
 // the function that takes the character set array and uses it to create a password
 function makePass(){
   // clears stored password in case function is reset due to not meeting parameters
-  generatedPassword = [];
+  newPassArray = [];
   // sets the values of passQual with user inputs
   passQual = {
     passLength: prompt("Choose a password length between 8 and 128 characters!", "8" ),
@@ -57,15 +57,15 @@ function makePass(){
   makeArray();
   // makes sure password length is equal to user parameter
   for (i = 0; i < passQual.passLength; i++){
-    generatedPassword.push(generatePassword[Math.floor(Math.random() * generatePassword.length)])
+    newPassArray.push(charsetArray[Math.floor(Math.random() * charsetArray.length)])
   }
   // turns the generated password array into a string without commas
-  let password = generatedPassword.join("");
+  let password = newPassArray.join("");
   // checks that, if a parameter is set to true, the password must contain a character from that set
-  if((passQual.lowCase == true && generatedPassword.some(item => lowChar.includes(item)) == false) 
-    || (passQual.upCase == true && generatedPassword.some(item => upChar.includes(item)) == false)
-    || (passQual.spChar == true && generatedPassword.some(item => specChar.includes(item)) == false)
-    || (passQual.numCh == true && generatedPassword.some(item => numChar.includes(item)) == false)){
+  if((passQual.lowCase == true && newPassArray.some(item => lowCharArray.includes(item)) == false) 
+    || (passQual.upCase == true && newPassArray.some(item => upCharArray.includes(item)) == false)
+    || (passQual.spChar == true && newPassArray.some(item => specCharArray.includes(item)) == false)
+    || (passQual.numCh == true && newPassArray.some(item => numCharArray.includes(item)) == false)){
       //if the password is missing a character the function is rerun from scratch
       makePass();
       return;
