@@ -21,17 +21,6 @@ let specChar = specialChar.split('');
 // makes sure the arrays to be generated are empty, might be redundant 
 let generatePassword = [];
 let generatedPassword = [];
-
-// declares default values for an object that determines which character sets
-// the password uses and how long the password is
-passQual = {
-  passLength: 8,
-  lowCase: true,
-  upCase: true,
-  spChar: true,
-  numCh: true
-}
-
 // a function that creates an array based on which character sets the user selects
 function makeArray() {
   generatePassword = [];
@@ -62,11 +51,20 @@ function makePass(){
     spChar: confirm("Press okay to include special characters")
   }
 
-  do {
-    alert("Password length must be between 8 and 128 characters!")
-    passQual.passLength = prompt("Choose a password length between 8 and 128 characters!", "8" )
+  // makes sure the password is between 8 and 128 characters in length
+  while (passQual.passLength < 8) {
+    alert("Password length must be between 8 and 128 characters and contain at least one set of characters!");
+    passQual.passLength = prompt("Choose a password length between 8 and 128 characters!");
   }
-  while (passQual.passLength < 8);
+
+  // makes sure at least one set of characters is selected
+  while (!passQual.lowCase && !passQual.upCase && !passQual.numCh && !passQual.spChar) {
+    alert("Must select at least one set of characters!");
+    passQual.lowCase = confirm("Press okay to include lowercase characters");
+    passQual.upCase = confirm("Press okay to include uppercase characters"); 
+    passQual.numCh = confirm("Press okay to include numbers");
+    passQual.spChar = confirm("Press okay to include special characters");
+  }
 
   makeArray();
   // makes sure password length is equal to user parameter
