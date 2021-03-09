@@ -67,6 +67,7 @@ function makePass(){
     || (passQual.spChar == true && newPassArray.some(item => specCharArray.includes(item)) == false)
     || (passQual.numCh == true && newPassArray.some(item => numCharArray.includes(item)) == false)){
       //if the password is missing a character the function is rerun from scratch
+      alert("Re-enter parameters");
       makePass();
       return;
     // if the password includes at least one character from selected parameters password is displayed
