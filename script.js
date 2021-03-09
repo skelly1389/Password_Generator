@@ -12,15 +12,15 @@ function writePassword() {
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
-let lowerChar = "abcdefghijklmnopqrstuvwxyz";
-let upperChar = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-let numberChar = "1234567890";
-let specialChar = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
+const lowerChar = "abcdefghijklmnopqrstuvwxyz";
+const upperChar = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const numberChar = "1234567890";
+const specialChar = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
 let lowChar = lowerChar.split('');
 let upChar = upperChar.split('');
 let numChar = numberChar.split('');
 let specChar = specialChar.split('');
-let generatePassword = [];
+generatePassword = [];
 let generatedPassword = [];
 
 passQual = {
@@ -32,6 +32,7 @@ passQual = {
 }
 
 function makeArray() {
+  generatePassword = [];
   if (passQual.lowCase) {
     generatePassword = generatePassword.concat(lowChar);
   }
@@ -47,6 +48,7 @@ function makeArray() {
 }
 
 function makePass(){
+  generatedPassword = [];
   makeArray();
   for (i = 0; i < passQual.passLength; i++){
     generatedPassword.push(generatePassword[Math.floor(Math.random() * generatePassword.length)])
@@ -54,17 +56,20 @@ function makePass(){
 
   let password = generatedPassword.join("");
 
-  let upChk = generatePassword.some(r=> upChar.includes(r))
-  console.log(upChk)
-  let lowChk = generatePassword.some(r=> lowChar.includes(r))
-  console.log(lowChk);
-  let spcChk = generatePassword.some(r=> specChar.includes(r))
-  console.log(spcChk);
-  let numChk = generatePassword.some(r=> numChar.includes(r))
-  console.log(numChk);
-
-  console.log(password);
-  
+  if((passQual.lowCase == true && generatedPassword.some(item => lowChar.includes(item)) == false) 
+    || (passQual.upCase == true && generatedPassword.some(item => upChar.includes(item)) == false)
+    || (passQual.spChar == true && generatedPassword.some(item => specChar.includes(item)) == false)
+    || (passQual.numCh == true && generatedPassword.some(item => numChar.includes(item)) == false)){
+      console.log("invalid");
+      makePass();
+      return;
+    } else {  
+        console.log(password);
+      }
 }
 
 makePass();
+
+function checkChars(arr1, arr2) { 
+  arr1.some(item => arr2.includes(item));
+}
