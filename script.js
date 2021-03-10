@@ -36,15 +36,10 @@ function userPrompts() {
     lowCase: confirm("Press okay to include lowercase characters"),
     upCase: confirm("Press okay to include uppercase characters"),
     numCh: confirm("Press okay to include numbers"),
-    spChar: confirm("Press okay to include special characters")
+    spChar: confirm("Press okay to include special characters"),
   }
-}
-// the function that takes the character set array and uses it to create a password
-function makePass() {
-  // clears stored password in case function is reset due to not meeting parameters
-  newPassArray = [];
-  // makes sure the password is between 8 and 128 characters in length
-  while (passQual.passLength < 8 || passQual.passLength > 128) {
+  // makes sure password length is a number between 8 and 128
+  while (passQual.passLength < 8 || passQual.passLength > 128 || isNaN(parseInt(passQual.passLength))) { 
     alert("Password length must be between 8 and 128 characters and contain at least one set of characters!");
     passQual.passLength = prompt("Choose a password length between 8 and 128 characters!");
   }
@@ -56,6 +51,11 @@ function makePass() {
     passQual.numCh = confirm("Press okay to include numbers");
     passQual.spChar = confirm("Press okay to include special characters");
   }
+}
+// the function that takes the character set array and uses it to create a password
+function makePass() {
+  // clears stored password in case function is reset due to not meeting parameters
+  newPassArray = [];
   makeArray();
   // makes sure password length is equal to user parameter
   for (i = 0; i < passQual.passLength; i++) {
