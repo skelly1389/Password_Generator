@@ -37,9 +37,10 @@ function userPrompts() {
     upCase: confirm("Press okay to include uppercase characters"),
     numCh: confirm("Press okay to include numbers"),
     spChar: confirm("Press okay to include special characters"),
+    numCheck: Number(this.passLength)
   }
   // makes sure password length is a number between 8 and 128
-  while (passQual.passLength < 8 || passQual.passLength > 128 || isNaN(parseInt(passQual.passLength))) { 
+  while (passQual.passLength < 8 || passQual.passLength > 128 || isNaN(passQual.passLength)) { 
     alert("Password length must be between 8 and 128 characters and contain at least one set of characters!");
     passQual.passLength = prompt("Choose a password length between 8 and 128 characters!");
   }
